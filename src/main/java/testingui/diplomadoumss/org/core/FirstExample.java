@@ -1,19 +1,32 @@
 package testingui.diplomadoumss.org.core;
 
+import org.openqa.selenium.WebDriver;
+import testingui.diplomadoumss.org.managepage.login.Login;
 import testingui.diplomadoumss.org.utilsfiles.PropertyAccesor;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 public class FirstExample {
     public static void main(String[] args) {
+        Login login = new Login();
+        WebDriver webDriver = DriverManager.getInstance().getWebDriver();
+        webDriver.get(PropertyAccesor.getInstance().getURL());
 
-        BroserType browserType = BroserType.valueOf(PropertyAccesor.getInstance().getBrowser());
+        login.setUserName("admin@phptravels.com");
+        login.setUserPassword("demoadmin");
+        webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        login.pressButtonLogin();
+
+        //webDriver.quit();
+
+        /*BroserType browserType = BroserType.valueOf(PropertyAccesor.getInstance().getBrowser());
         Browser browser = DriverFactory.getInstance().getBrowser(browserType);
         browser.getWebDriver().get(PropertyAccesor.getInstance().getURL());
-        browser.getWebDriver().quit();
+        browser.getWebDriver().quit();*/
 
-//        exampleMap();
+        //exampleMap();
     }
 
     public static void exampleMap(){
