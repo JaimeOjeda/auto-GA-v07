@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import testingui.diplomadoumss.org.managepage.BasePage;
+import testingui.diplomadoumss.org.managepage.dashboard.Dashboard;
 
 public class Login extends BasePage {
 
@@ -16,6 +17,10 @@ public class Login extends BasePage {
     @FindBy(xpath = "//button[@type='submit']")
     private WebElement buttonSubmit;
 
+    //@FindBy(linkText = "Cars")
+    @FindBy(xpath = "//a[@href ='#Cars']")
+    private WebElement linkCars;
+
     public void setUserName(String email) {
         emailTextField.sendKeys(email);
     }
@@ -26,6 +31,17 @@ public class Login extends BasePage {
 
     public void pressButtonLogin() {
         buttonSubmit.click();
+    }
+
+    public void goToCars(){
+        linkCars.click();
+    }
+
+    public Dashboard setCredentials() {
+        setUserName("admin@phptravels.com");
+        setUserPassword("demoadmin");
+        pressButtonLogin();
+        return new Dashboard();
     }
 
 }
